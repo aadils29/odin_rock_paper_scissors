@@ -16,11 +16,24 @@ function getHumanChoice() {
   return choice;
 }
 
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
+let humanScore = 0;
+let computerScore = 0;
 
-  function playRound(humanChoice, computerChoice) {
+function playRound(humanChoice, computerChoice) {
+  if (humanScore >= 5 && computerScore >= 5) {
+    if (humanScore > computerScore)
+      console.log(
+        `You won! Your score: ${humanScore} Computer score: ${computerScore}`
+      );
+    else if (computerScore > humanScore)
+      console.log(
+        `You lost! Your score: ${humanScore} Computer score: ${computerScore}`
+      );
+    else
+      console.log(
+        `It's a tie! Your score: ${humanScore} Computer score: ${computerScore}`
+      );
+  } else {
     humanChoice_upper = humanChoice.toUpperCase();
 
     if (humanChoice_upper === computerChoice) console.log("It's a Tie!");
@@ -35,20 +48,5 @@ function playGame() {
       console.log(`You lose! ${computerChoice} beats ${humanChoice_upper}!`);
       computerScore++;
     }
-  }
-
-  while (humanScore < 5 && computerScore < 5) {
-    if (humanScore > computerScore)
-      console.log(
-        `You won! Your score: ${humanScore} Computer score: ${computerScore}`
-      );
-    else if (computerScore > humanScore)
-      console.log(
-        `You lost! Your score: ${humanScore} Computer score: ${computerScore}`
-      );
-    else
-      console.log(
-        `It's a tie! Your score: ${humanScore} Computer score: ${computerScore}`
-      );
   }
 }
