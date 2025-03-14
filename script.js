@@ -19,46 +19,50 @@ function getHumanChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound(humanChoice, computerChoice) {
-  if (humanScore >= 5 && computerScore >= 5) {
-    if (humanScore > computerScore)
-      console.log(
-        `You won! Your score: ${humanScore} Computer score: ${computerScore}`
-      );
-    else if (computerScore > humanScore)
-      console.log(
-        `You lost! Your score: ${humanScore} Computer score: ${computerScore}`
-      );
-    else
-      console.log(
-        `It's a tie! Your score: ${humanScore} Computer score: ${computerScore}`
-      );
-  } else {
-    humanChoice_upper = humanChoice.toUpperCase();
+let game = document.querySelector("#game");
+let score = document.querySelector("#score");
 
-    if (humanChoice_upper === computerChoice) {
-      console.log(
-        `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`
-      );
-      console.log("It's a Tie!");
-    } else if (
-      (humanChoice_upper === "ROCK" && computerChoice === "SCISSORS") ||
-      (humanChoice_upper === "PAPER" && computerChoice === "ROCK") ||
-      (humanChoice_upper === "SCISSORS" && computerChoice === "PAPER")
-    ) {
-      console.log(
-        `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`
-      );
-      console.log(`You win! ${humanChoice_upper} beats ${computerChoice}!`);
-      humanScore++;
-    } else {
-      console.log(
-        `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`
-      );
-      console.log(`You lose! ${computerChoice} beats ${humanChoice_upper}!`);
-      computerScore++;
-    }
+function updateScore() {
+  score.textContent = `Your score: ${humanScore} Computer Score: ${computerScore}`;
+}
+
+updateScore();
+
+function playRound(humanChoice, computerChoice) {
+  humanChoice_upper = humanChoice.toUpperCase();
+
+  if (humanChoice_upper === computerChoice) {
+    game.textContent = `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`;
+    game.textContent = "It's a Tie!";
+  } else if (
+    (humanChoice_upper === "ROCK" && computerChoice === "SCISSORS") ||
+    (humanChoice_upper === "PAPER" && computerChoice === "ROCK") ||
+    (humanChoice_upper === "SCISSORS" && computerChoice === "PAPER")
+  ) {
+    game.textContent = `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`;
+    game.textContent = `You win! ${humanChoice_upper} beats ${computerChoice}!`;
+    humanScore++;
+    updateScore();
+    if (humanScore >= 5 || computerScore >= 5) displayWinner();
+  } else {
+    game.textContent = `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`;
+    game.textContent = `You lose! ${computerChoice} beats ${humanChoice_upper}!`;
+    computerScore++;
+    updateScore();
+    if (humanScore >= 5 || computerScore >= 5) displayWinner();
   }
+}
+
+function displayWinner() {
+  if (humanScore > computerScore)
+    game.textContent = `You won! Your score: ${humanScore} Computer score: ${computerScore}`;
+  else if (computerScore > humanScore)
+    game.textContent = `You lost! Your score: ${humanScore} Computer score: ${computerScore}`;
+  else
+    game.textContent = `It's a tie! Your score: ${humanScore} Computer score: ${computerScore}`;
+  humanScore = 0;
+  computerScore = 0;
+  updateScore();
 }
 
 const rockButton = document.querySelector(".rock");
