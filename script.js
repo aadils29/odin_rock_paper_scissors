@@ -21,9 +21,10 @@ let computerScore = 0;
 
 let game = document.querySelector("#game");
 let score = document.querySelector("#score");
+let displayChoice = document.querySelector("#display-choice");
 
 function updateScore() {
-  score.textContent = `Your score: ${humanScore} Computer Score: ${computerScore}`;
+  score.textContent = `Your score: ${humanScore} Computer score: ${computerScore}`;
 }
 
 updateScore();
@@ -32,20 +33,20 @@ function playRound(humanChoice, computerChoice) {
   humanChoice_upper = humanChoice.toUpperCase();
 
   if (humanChoice_upper === computerChoice) {
-    game.textContent = `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`;
+    displayChoice.textContent = `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`;
     game.textContent = "It's a Tie!";
   } else if (
     (humanChoice_upper === "ROCK" && computerChoice === "SCISSORS") ||
     (humanChoice_upper === "PAPER" && computerChoice === "ROCK") ||
     (humanChoice_upper === "SCISSORS" && computerChoice === "PAPER")
   ) {
-    game.textContent = `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`;
+    displayChoice.textContent = `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`;
     game.textContent = `You win! ${humanChoice_upper} beats ${computerChoice}!`;
     humanScore++;
     updateScore();
     if (humanScore >= 5 || computerScore >= 5) displayWinner();
   } else {
-    game.textContent = `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`;
+    displayChoice.textContent = `You chose ${humanChoice_upper} and the computer chose ${computerChoice}.`;
     game.textContent = `You lose! ${computerChoice} beats ${humanChoice_upper}!`;
     computerScore++;
     updateScore();
