@@ -50,3 +50,19 @@ function playRound(humanChoice, computerChoice) {
     }
   }
 }
+
+const rockButton = document.querySelector(".rock");
+const paperButton = document.querySelector(".paper");
+const scissorsButton = document.querySelector(".scissors");
+
+rockButton.addEventListener("click", () => {
+  playRound("ROCK", getComputerChoice());
+});
+
+paperButton.addEventListener("click", () => {
+  playRound("PAPER", getComputerChoice());
+});
+
+scissorsButton.addEventListener("click", () => {
+  playRound("SCISSORS", getComputerChoice());
+});
